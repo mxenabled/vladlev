@@ -1,0 +1,8 @@
+*.out
+*.so
+*.swp
+.bundle
+Gemfile.lock
+coverage
+pkg/*
+tmp
