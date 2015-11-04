@@ -51,7 +51,8 @@ describe Vladlev do
   end
 
   describe "normalized distance" do
-    specify{ expect(Vladlev.distance("cur", "cut", 10)).to eq(1) }
+    specify{ expect(Vladlev.get_normalized_distance("hi", "high", 1)).to eq(1.0) }
+    specify{ expect(Vladlev.get_normalized_distance("hi", "high")).to eq(0.5) }
     specify{ expect(Vladlev.get_normalized_distance("hello", "hello")).to eq(0.0) }
     specify{ expect(Vladlev.get_normalized_distance("goodnight", "goodnite")).to eq(0.3333333432674408) }
     specify{ expect(Vladlev.get_normalized_distance("", "goodbye")).to eq(1.0) }
