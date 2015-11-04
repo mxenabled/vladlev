@@ -19,6 +19,10 @@ module Vladlev
     def self._internal_distance(str1, str2, max)
       Java::LevenshteinDistance.distance(str1, str2, max)
     end
+
+    def self._normalized_distance(str1, str2, max)
+      Java::LevenshteinDistance.normalized_distance(str1, str2, max)
+    end
   elsif C_EXT_NATIVE
     require 'ffi'
     extend ::FFI::Library
@@ -32,6 +36,7 @@ module Vladlev
 
     ffi_lib native_file_path
     attach_function :levenshtein_extern, [:pointer, :pointer, :int32], :int32
+    attach_function :normalized_levenshtein_extern, [:pointer, :pointer, :int32], :float
 
     # Calculate the levenshtein distance between two strings
     #
@@ -40,6 +45,10 @@ module Vladlev
     # @return [Integer] the levenshtein distance between the strings
     def self._internal_distance(str1, str2, max)
       self.levenshtein_extern(str1, str2, max)
+    end
+
+    def self._normalized_distance(str1, str2, max)
+      self.normalized_levenshtein_extern(str1, str2, max)
     end
   else
     require 'vladlev/levenshtein'
@@ -65,5 +74,13 @@ module Vladlev
     return str1.size if str2.nil?
 
     self._internal_distance(str1, str2, max)
+  end
+
+  def self.get_normalized_distance(str1, str2, max = 9999)
+    return 0 if str1.nil? && str2.nil?
+    return str2.size if str1.nil?
+    return str1.size if str2.nil?
+
+    self._normalized_distance(str1, str2, max)
   end
 end

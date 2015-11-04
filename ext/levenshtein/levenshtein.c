@@ -94,7 +94,7 @@ int levenshtein_extern(char* a, char* b, int max_distance)
   int distance = leven->b_length;
 
   if(max_distance < 0) {
-    max_distance = (a_len > b_len) ? a_len : b_len;;
+    max_distance = (a_len > b_len) ? a_len : b_len;
   }
 
   leven->maximum_allowable_distance = max_distance;
@@ -103,4 +103,16 @@ int levenshtein_extern(char* a, char* b, int max_distance)
   FREE(leven);
 
   return distance;
+}
+
+float normalized_levenshtein_extern(char* a, char* b, int max_distance)
+{
+  int a_len = (a == NULL) ? 0 : strlen(a);
+  int b_len = (b == NULL) ? 0 : strlen(b);
+
+  int max_string_length = (a_len > b_len) ? a_len : b_len;
+  if(max_string_length == 0) {
+    return 0;
+  }
+  return (float)levenshtein_extern(a, b, max_distance) / max_string_length;
 }

@@ -39,5 +39,11 @@ module Vladlev
 
       return broke_max ? shortest_string.size : calculation_grid[longest_string.size - 1]
     end
+
+    def self.normalized_distance(str1, str2, maximum_allowable_distance = 9999)
+      longest_string_length = (str1 > str2) ? str1.length : str2.length
+      return 0 if longest_string_length
+      distance / longest_string_length
+    end
   end
 end
