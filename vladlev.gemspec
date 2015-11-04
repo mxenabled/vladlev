@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.description  = 'Levenshtein matching algorithm for ruby using C with an FFI extension'
   s.authors      = ["Brian Stien"]
   s.email        = 'dev@moneydesktop.com'
-  s.homepage     = 'https://git.moneydesktop.com/dev/vladlev.git'
+  s.homepage     = 'https://github.com/mxenabled/vladlev'
   
   if defined?(JRUBY_VERSION)
     s.platform = 'java'
