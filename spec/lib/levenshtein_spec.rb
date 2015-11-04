@@ -4,6 +4,7 @@ describe Vladlev do
   specify{ Vladlev.distance("hello", "hello").should equal(0) }
   specify{ Vladlev.distance("", "").should equal(0) }
   specify{ Vladlev.distance("hello", "jello").should equal(1) }
+  specify{ Vladlev.distance("hella", "hello").should equal(1) }
   specify{ Vladlev.distance("hello", "jell").should equal(2) }
   specify{ Vladlev.distance("lo", "jello").should equal(3) }
   specify{ Vladlev.distance("jello", "lo").should equal(3) }
@@ -47,6 +48,16 @@ describe Vladlev do
     specify{ Vladlev.distance("", ",./>?").should equal(5) }
     specify{ Vladlev.distance('*&^%$+_=-)(*&^%$#@!~123456789', '*&^%$+_=-)(*&^%$#@!~').should equal(9) }
     specify{ Vladlev.distance('*&^%$+_=-)(*&^%$#@!~', "").should equal(20) }
+  end
+
+  describe "normalized distance" do
+    specify{ expect(Vladlev.get_normalized_distance("hi", "high", 1)).to eq(1.0) }
+    specify{ expect(Vladlev.get_normalized_distance("hi", "high")).to eq(0.5) }
+    specify{ expect(Vladlev.get_normalized_distance("hello", "hello")).to eq(0.0) }
+    specify{ expect(Vladlev.get_normalized_distance("goodnight", "goodnite")).to eq(0.3333333432674408) }
+    specify{ expect(Vladlev.get_normalized_distance("", "goodbye")).to eq(1.0) }
+    specify{ expect(Vladlev.get_normalized_distance("goodbye", "")).to eq(1.0) }
+    specify{ expect(Vladlev.get_normalized_distance("", "")).to eq(0.0) }
   end
   
   describe '#distance' do

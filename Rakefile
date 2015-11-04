@@ -6,7 +6,7 @@ require 'rake/clean'
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec)
 
-spec = Gem::Specification.load('levee.gemspec')
+spec = Gem::Specification.load('vladlev.gemspec')
 
 Gem::PackageTask.new(spec) do |pkg|
 end
