@@ -52,15 +52,15 @@ public class LevenshteinDistance {
     return distance(str1, str2, 9999);
   }
 
-  public static float normalized_distance(String str1, String str2) {
+  public static double normalized_distance(String str1, String str2) {
    return normalized_distance(str1, str2, 9999); 
   }
 
-  public static float normalized_distance(String str1, String str2, long maximumDistance) {
+  public static double normalized_distance(String str1, String str2, long maximumDistance) {
     int maxStringLength = (str1.length() > str2.length()) ? str1.length() : str2.length();
     if(maxStringLength == 0) {
       return 0;
     }
-    return distance(str1, str2, maximumDistance) / (float)maxStringLength;
+    return distance(str1, str2, maximumDistance) / (double)maxStringLength;
   }
 }

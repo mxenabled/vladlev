@@ -36,7 +36,7 @@ module Vladlev
 
     ffi_lib native_file_path
     attach_function :levenshtein_extern, [:pointer, :pointer, :int32], :int32
-    attach_function :normalized_levenshtein_extern, [:pointer, :pointer, :int32], :float
+    attach_function :normalized_levenshtein_extern, [:pointer, :pointer, :int32], :double
 
     # Calculate the levenshtein distance between two strings
     #
