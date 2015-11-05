@@ -54,7 +54,7 @@ describe Vladlev do
     specify{ expect(Vladlev.get_normalized_distance("hi", "high", 1)).to eq(1.0) }
     specify{ expect(Vladlev.get_normalized_distance("hi", "high")).to eq(0.5) }
     specify{ expect(Vladlev.get_normalized_distance("hello", "hello")).to eq(0.0) }
-    specify{ expect(Vladlev.get_normalized_distance("goodnight", "goodnite")).to eq(0.3333333432674408) }
+    specify{ expect(Vladlev.get_normalized_distance("goodnight", "goodnite")).to be_between(0.3333, 0.3334) }
     specify{ expect(Vladlev.get_normalized_distance("", "goodbye")).to eq(1.0) }
     specify{ expect(Vladlev.get_normalized_distance("goodbye", "")).to eq(1.0) }
     specify{ expect(Vladlev.get_normalized_distance("", "")).to eq(0.0) }
