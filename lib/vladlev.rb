@@ -4,7 +4,7 @@ module Vladlev
   end
 
   JRUBY_NATIVE = RUBY_PLATFORM =~ /java/ && relative_exists?('levenshtein.jar')
-  C_EXT_NATIVE = !JRUBY_NATIVE && 
+  C_EXT_NATIVE = !JRUBY_NATIVE &&
     (relative_exists?('levenshtein.bundle') || relative_exists?('levenshtein.so'))
 
   if JRUBY_NATIVE
@@ -54,7 +54,7 @@ module Vladlev
     require 'vladlev/levenshtein'
     warn <<-PURE_RUBY
       Could not load C extension or Java Extension for Vladlev
-      Will utilize pure ruby version which is significantly 
+      Will utilize pure ruby version which is significantly
       slower for many comparisons.
     PURE_RUBY
 
@@ -78,8 +78,8 @@ module Vladlev
 
   def self.get_normalized_distance(str1, str2, max = 9999)
     return 0 if str1.nil? && str2.nil?
-    return str2.size if str1.nil?
-    return str1.size if str2.nil?
+    return 1.0 if str1.nil?
+    return 1.0 if str2.nil?
 
     self._normalized_distance(str1, str2, max)
   end
