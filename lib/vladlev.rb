@@ -1,15 +1,14 @@
 module Vladlev
-  def self.relative_exists?(filename)
-    File.exists?(File.join(File.dirname(__FILE__), filename))
+  def self.file_fallback_path(*files)
+    files.detect { |file| File.exists?(File.join(File.dirname(__FILE__), file)) }
   end
 
-  JRUBY_NATIVE = RUBY_PLATFORM =~ /java/ && relative_exists?('levenshtein.jar')
-  C_EXT_NATIVE = !JRUBY_NATIVE &&
-    (relative_exists?('levenshtein.bundle') || relative_exists?('levenshtein.so'))
+  JRUBY_NATIVE = RUBY_PLATFORM =~ /java/ && file_fallback_path('levenshtein.jar')
+  C_EXT_NATIVE = !JRUBY_NATIVE && file_fallback_path('levenshtein.so', 'levenshtein.bundle')
 
   if JRUBY_NATIVE
     require 'java'
-    require File.join(File.dirname(__FILE__), 'levenshtein.jar')
+    require JRUBY_NATIVE
 
     # Calculate the levenshtein distance between two strings
     #
@@ -27,14 +26,7 @@ module Vladlev
     require 'ffi'
     extend ::FFI::Library
 
-    native_file_path = case
-                       when relative_exists?('levenshtein.bundle') then
-                         File.join(File.dirname(__FILE__), 'levenshtein.bundle')
-                       else
-                         File.join(File.dirname(__FILE__), 'levenshtein.so')
-                       end
-
-    ffi_lib native_file_path
+    ffi_lib C_EXT_NATIVE
     attach_function :levenshtein_extern, [:pointer, :pointer, :int32], :int32
     attach_function :normalized_levenshtein_extern, [:pointer, :pointer, :int32], :double
 
