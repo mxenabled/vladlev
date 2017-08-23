@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+ - 2.3.3
+ - jruby-9.1.7.0
+sudo: false
+cache: bundler
+branches:
+  only:
+  - master
+before_script:
+- bundle exec rake compile
+notifications:
+  email:
+    on_success: never
+    on_failure: always
