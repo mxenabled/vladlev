@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.authors      = ["Brian Stien"]
   s.email        = 'dev@moneydesktop.com'
   s.homepage     = 'https://github.com/mxenabled/vladlev'
+  s.license      = "MIT"
   
   if defined?(JRUBY_VERSION)
     s.platform = 'java'
