@@ -1,6 +1,6 @@
 module Vladlev
   def self.file_fallback_path(*files)
-    files.map { |file| File.join(File.dirname(__FILE__), file) }.detect { |file| File.exists?(file) }
+    files.map { |file| File.join(File.dirname(__FILE__), file) }.detect { |file| File.exist?(file) }
   end
 
   JRUBY_NATIVE = RUBY_PLATFORM =~ /java/ && file_fallback_path('levenshtein.jar')
