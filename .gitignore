@@ -1,6 +1,7 @@
 *.out
 *.so
 *.swp
+*.bundle
 .bundle
 Gemfile.lock
 coverage
